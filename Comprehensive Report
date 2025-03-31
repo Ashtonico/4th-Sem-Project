@@ -1,0 +1,56 @@
+Data Wrangling for Customer Analysis – Report
+
+Introduction
+Data wrangling is a crucial step in preparing raw data for meaningful analysis. This report documents the data cleaning, transformation, and preparation process applied to a dataset containing customer demographics, purchase history, and other relevant details. The goal was to ensure data quality by handling missing values, inconsistencies, outliers, and other anomalies while making the dataset more suitable for further analysis.  
+
+
+Phase 1: Initial Data Exploration
+Before making any modifications, an initial inspection of the dataset was conducted. The dataset contained **550,068 rows and 10 columns**. The columns represented customer details, product information, and purchase amounts. Upon checking for missing values, it was found that no data was missing, which simplified the cleaning process.  
+
+The data types of each column were also examined, revealing that some categorical columns were stored as text, while numerical fields were correctly identified. A statistical summary of numerical columns showed a significant range in purchase amounts, with values varying from ₹12 to ₹23,961. Outliers were detected in both the purchase and product category columns, indicating the presence of extreme or potentially erroneous values.  
+
+
+Phase 2: Data Cleaning
+Handling Data Type Issues 
+One of the first corrections made was converting the `"Stay_In_Current_City_Years"` column from a categorical format (where `"4+"` was used instead of a numeric value) into an integer type. This was necessary to allow numerical operations and ensure consistency in city tenure data.  
+
+Removing Duplicates
+Duplicate records were identified and removed. Although the dataset did not have a significant number of duplicate rows, even minor redundancy could lead to inaccuracies in analysis. The removal ensured that each row represented a unique transaction.  
+
+Standardizing Categorical Data
+The dataset contained categorical values in mixed case formats (e.g., `"Male"` and `"male"`). To ensure consistency, text columns like `"Gender"`, `"Age"`, and `"City_Category"` were standardized by converting all values to lowercase. This step prevented inconsistencies when grouping or filtering data.  
+
+Handling Outliers
+The purchase column exhibited extreme values, with some transactions appearing significantly higher than the majority. To address this, values below the 5th percentile and above the 95th percentile were capped. This ensured that outliers did not skew the analysis while preserving meaningful variations in purchase behavior.  
+
+
+Phase 3: Data Transformation
+Feature Engineering – Creating Age Groups
+To enhance analysis, the `"Age"` column was transformed into meaningful categories such as `"Teen"`, `"Young Adult"`, `"Adult"`, `"Middle Aged"`, `"Senior"`, and `"Elderly"`. This allowed customer trends to be observed across different life stages, making it easier to interpret purchasing behaviors.  
+
+Aggregating Data – Analyzing Purchase Behavior by Age Group
+To gain insights into spending patterns, the dataset was grouped by `"Age_Group"` and the average purchase amount for each category was calculated. This summary provided a clearer picture of which demographic segments contributed the most to overall sales.  
+
+Data Normalization
+The `"Purchase"` column was normalized using **Min-Max Scaling**, which adjusted values to a scale between 0 and 1. This was done to standardize the purchase amounts and ensure comparability with other datasets if needed for future machine learning models.  
+
+Data Binning – Categorizing Purchases
+To further refine the dataset, purchase amounts were categorized into four levels: `"Low"`, `"Medium"`, `"High"`, and `"Very High"`. This segmentation helped in identifying different spending patterns and made analysis more intuitive.  
+
+
+Phase 4: Reporting and Documentation
+After completing all transformations, the cleaned dataset was saved for future analysis. The final dataset retained all original records while incorporating meaningful enhancements that improved its usability. A summary of the key transformations included:  
+- Data Cleaning:Duplicate removal, standardization of text data, handling of outliers, and correction of data types.  
+- Data Transformation:Creation of new categorical features, grouping and aggregating data, normalization of purchase values, and segmentation of spending levels.  
+
+The final dataset was verified by displaying its first few rows and ensuring that all modifications were correctly applied.  
+
+
+Assumptions and Limitations
+- Data Accuracy: It was assumed that the given dataset was reliable and contained no major data entry errors. However, unintentional errors could still exist.  
+- Outlier Handling:The decision to cap purchase values was made to prevent extreme outliers from distorting trends. However, in some cases, these extreme values may represent legitimate high-value transactions.  
+- Age Grouping:The `"Age_Group"` categories were defined based on general societal norms, but individual purchase behavior may not always align with these groups.  
+- Normalization Impact: While Min-Max Scaling was applied, this step may not always be necessary unless integrating with models requiring standardized inputs.  
+
+Conclusion
+The data wrangling process successfully transformed a raw dataset into a cleaner and more structured format. Through thoughtful cleaning, feature engineering, and transformation, the dataset is now better suited for customer analysis, helping businesses gain insights into purchasing behavior and customer demographics. These improvements lay the foundation for further exploratory analysis, visualization, or predictive modeling.
